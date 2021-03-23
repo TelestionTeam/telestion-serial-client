@@ -1,0 +1,41 @@
+{
+  "org.telestion.configuration": {
+    "app_name": "Telestion Template",
+    "verticles": [
+      {
+        "name": "Message Logger",
+        "verticle": "org.telestion.core.monitoring.MessageLogger",
+        "magnitude": 1,
+        "config": {}
+      },
+      {
+        "name": "Serial Connection",
+        "verticle": "org.telestion.core.connection.SerialConn",
+        "magnitude": 1,
+        "config": {
+          "serialPort": "COM6",
+          "consumeAddress": "serialOutgoing",
+          "publishAddress": "serialIncoming"
+        }
+      },
+      {
+        "name": "Data Forward",
+        "verticle": "org.telestion.tool.serialclient.DataBridge",
+        "magnitude": 1,
+        "config": {}
+      },
+      {
+        "name": "TCP Connection",
+        "verticle": "org.telestion.core.connection.TcpConn",
+        "magnitude": 1,
+        "config": {
+          "host": "127.0.0.1",
+          "port": 9871,
+          "broadcastAddress": "tcpBroadcast",
+          "targetAddresses": [],
+          "consumingAddresses": ["tcpOutgoing"]
+        }
+      }
+    ]
+  }
+}
